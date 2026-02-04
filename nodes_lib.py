@@ -1,6 +1,7 @@
 from PIL import Image, ImageEnhance, ImageFilter, ImageDraw, ImageOps
 from core_ui import BaseNode
 from config import *
+import math
 
 NODE_REGISTRY = {}
 def register_node(cls):
@@ -161,7 +162,7 @@ class CropNode(BaseNode):
 # ====================
 
 @register_node
-class DrawSquareNode(BaseNode):
+class DrawRectNode(BaseNode):
     def __init__(self):
         super().__init__("Draw Rect", header_color=C_HEADER_DEFAULT)
         # the automatic width logic in core_ui will handle these labels now
@@ -185,7 +186,7 @@ class DrawSquareNode(BaseNode):
         return img
 
 @register_node
-class ColorNode(BaseNode):
+class MakeColorNode(BaseNode):
     def __init__(self):
         super().__init__("Make Color", header_color=C_HEADER_DEFAULT)
         self.add_input("Red", "FLOAT", 255)
@@ -244,3 +245,92 @@ class FloatNode(BaseNode):
 
     def eval(self):
         return float(self.get_input_val(0))
+
+@register_node
+class GetImageWidthNode(BaseNode):
+    def __init__(self):
+        super().__init__("Get Image Width", header_color=C_HEADER_FUNC)
+        self.add_input("Image", "IMAGE")
+        self.add_output("Width", "FLOAT")
+
+    def eval(self):
+        img = self.get_input_val(0)
+        if img: 
+            return float(img.size[0]) # Ensure it's a float
+        return 0.0 # Return 0 if no image is connected
+
+@register_node
+class GetImageHeightNode(BaseNode):
+    def __init__(self):
+        super().__init__("Get Image Height", header_color=C_HEADER_FUNC)
+        self.add_input("Image", "IMAGE")
+        self.add_output("Height", "FLOAT")
+
+    def eval(self):
+        img = self.get_input_val(0)
+        if img: 
+            return float(img.size[1])
+        return 0.0
+
+@register_node
+class FloatAddNode(BaseNode):
+    def __init__(self):
+        super().__init__("Float Add", header_color=C_HEADER_FUNC)
+        self.add_input("A", "FLOAT")
+        self.add_input("B", "FLOAT")
+        self.add_output("Result", "FLOAT")
+
+    def eval(self):
+        a = self.get_input_val(0)
+        b = self.get_input_val(1)
+        return a + b
+
+@register_node
+class FloatSubtractNode(BaseNode):
+    def __init__(self):
+        super().__init__("Float Subtract", header_color=C_HEADER_FUNC)
+        self.add_input("A", "FLOAT")
+        self.add_input("B", "FLOAT")
+        self.add_output("Result", "FLOAT")
+
+    def eval(self):
+        a = self.get_input_val(0)
+        b = self.get_input_val(1)
+        return a - b
+
+@register_node
+class FloatMultiplyNode(BaseNode):
+    def __init__(self):
+        super().__init__("Float Multiply", header_color=C_HEADER_FUNC)
+        self.add_input("A", "FLOAT")
+        self.add_input("B", "FLOAT")
+        self.add_output("Result", "FLOAT")
+
+    def eval(self):
+        a = self.get_input_val(0)
+        b = self.get_input_val(1)
+        return a * b
+
+@register_node
+class FloatDivideNode(BaseNode):
+    def __init__(self):
+        super().__init__("Float Divide", header_color=C_HEADER_FUNC)
+        self.add_input("A", "FLOAT")
+        self.add_input("B", "FLOAT")
+        self.add_output("Result", "FLOAT")
+
+    def eval(self):
+        a = self.get_input_val(0)
+        b = self.get_input_val(1)
+        return a / b
+
+@register_node
+class FloatSqrtNode(BaseNode):
+    def __init__(self):
+        super().__init__("Float Square Root", header_color=C_HEADER_FUNC)
+        self.add_input("A", "FLOAT")
+        self.add_output("Result", "FLOAT")
+
+    def eval(self):
+        a = self.get_input_val(0)
+        return math.sqrt(a)

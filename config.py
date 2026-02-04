@@ -1,16 +1,16 @@
 from PySide6.QtGui import QColor
 
 # ====================
-# colors (ue5 style)
+# colors
 # ====================
 C_BG_APP     = QColor(15, 15, 15)
 C_BG_VIEW    = QColor(25, 25, 25)
 C_GRID_LINES = QColor(40, 40, 40)
 
 # node colors
-C_NODE_BODY    = QColor(20, 20, 20, 200) # semi-transparent dark
+C_NODE_BODY    = QColor(20, 20, 20, 180) # semi-transparent dark
 C_NODE_BORDER  = QColor(10, 10, 10)
-C_NODE_SEL     = QColor(255, 200, 0)     # golden yellow selection
+C_NODE_SEL     = QColor(255, 200, 0)     # selection
 
 # header colors
 C_HEADER_DEFAULT = QColor(50, 50, 50)
@@ -44,12 +44,12 @@ QScrollBar::handle:horizontal { background: #444; min-width: 20px; border-radius
 QLineEdit { 
     background: #000; color: #eee; 
     border: 1px solid #444; border-radius: 4px; 
-    font-family: Consolas; font-size: 11px; padding: 2px; 
+    font-family: monospace; font-size: 11px; padding: 2px; 
 }
 QLineEdit:disabled { background: #222; color: #555; border: 1px solid #222; }
 
 QListWidget { background: #1a1a1a; border: none; font-size: 13px; color: #ccc; outline: none; }
-QListWidget::item { padding: 8px; border-bottom: 1px solid #252525; }
+QListWidget::item { padding: 2px; border-bottom: 1px solid #252525; }
 QListWidget::item:hover { background: #333; }
 QListWidget::item:selected { background: #0078d7; color: white; }
 

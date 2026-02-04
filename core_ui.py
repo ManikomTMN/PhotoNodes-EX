@@ -87,7 +87,7 @@ class Edge(QGraphicsPathItem):
 # base node
 # ==========================================
 class BaseNode(QGraphicsItem):
-    def __init__(self, name="Node", width=160, header_color=C_HEADER_DEFAULT):
+    def __init__(self, name="Node", width=165, header_color=C_HEADER_DEFAULT):
         super().__init__()
         self.name = name
         self.width = width
@@ -188,12 +188,12 @@ class BaseNode(QGraphicsItem):
         return QRectF(0, 0, self.width, self.height)
 
     def paint(self, painter, option, widget):
-        # header path (gripe 3 fix)
-        # we combine a rounded rect and a square rect at the bottom to ensure no gaps
+        # header path
+        # combine a rounded rect and a square rect at the bottom to ensure no gaps
         path_header = QPainterPath()
         path_header.addRoundedRect(0, 0, self.width, 30, 8, 8)
         path_header.addRect(0, 20, self.width, 10) 
-        path_header.setFillRule(Qt.WindingFill) # this fixes the "half color" issue
+        path_header.setFillRule(Qt.WindingFill)
         
         grad = QLinearGradient(0, 0, 0, 30)
         grad.setColorAt(0, self.header_color.lighter(120))
